@@ -1,6 +1,6 @@
 ﻿using MrMoney.Domain.Models;
 
-namespace MrMoney.Domain.Interfaces
+namespace MrMoney.Domain.Interfaces.Services
 {
     public interface IAuthService
     {

@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MrMoney.Domain.Interfaces;
+using MrMoney.Domain.Interfaces.Services;
 using MrMoney.Domain.Models;
 
 namespace MrMoney.API.Controllers

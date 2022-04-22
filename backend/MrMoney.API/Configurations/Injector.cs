@@ -1,5 +1,5 @@
-﻿using MrMoney.Domain.Interfaces;
-using MrMoney.Domain.Interfaces.Repositories;
+﻿using MrMoney.Domain.Interfaces.Repositories;
+using MrMoney.Domain.Interfaces.Services;
 using MrMoney.Domain.Services;
 using MrMoney.Infrastructure.Data;
 using MrMoney.Infrastructure.Repositories;

@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Infrastructure\MrMoney.Infrastructure.csproj" />
+    <ProjectReference Include="..\MrMoney.Infrastructure\MrMoney.Infrastructure.csproj" />
     <ProjectReference Include="..\MrMoney.CrossCutting\MrMoney.Util.csproj" />
   </ItemGroup>
 
