@@ -4,7 +4,7 @@ using MrMoney.Domain.Models;
 
 namespace MrMoney.Infrastructure.Data
 {
-    public class MongoDbContext
+    public class MongoDbContext<T> where T: class
     {
         public static string? ConnectionString { get; set; }
         public static string? DatabaseName { get; set; }
@@ -30,6 +30,6 @@ namespace MrMoney.Infrastructure.Data
             }
         }
 
-        public IMongoCollection<User> UserCollection { get { return _database.GetCollection<User>("User"); } }
+        public IMongoCollection<T> Collection { get { return _database.GetCollection<T>(nameof(T)); } }
     }
 }

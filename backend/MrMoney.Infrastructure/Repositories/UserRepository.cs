@@ -6,7 +6,7 @@ using MrMoney.Infrastructure.Data;
 
 namespace MrMoney.Infrastructure.Repositories
 {
-    public class UserRepository : MongoDbContext, IUserRepository
+    public class UserRepository : MongoDbContext<User>, IUserRepository
     {
         public async Task<List<User>> GetAsync() =>
             await UserCollection.Find(_ => true).ToListAsync();
