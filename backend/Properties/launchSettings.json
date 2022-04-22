@@ -9,7 +9,7 @@
     }
   },
   "profiles": {
-    "MrMoney": {
+    "MrMoney.API": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "swagger",
