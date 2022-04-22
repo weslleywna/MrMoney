@@ -10,8 +10,4 @@
     <PackageReference Include="MongoDB.Bson" Version="2.15.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\MrMoney.CrossCutting\MrMoney.Util.csproj" />
-  </ItemGroup>
-
 </Project>

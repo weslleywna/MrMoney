@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MrMoney.CrossCutting\MrMoney.Util.csproj" />
     <ProjectReference Include="..\MrMoney.Domain\MrMoney.Domain.csproj" />
   </ItemGroup>
 
