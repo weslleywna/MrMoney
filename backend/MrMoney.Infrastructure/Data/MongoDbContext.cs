@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.Options;
-using MongoDB.Driver;
-using MrMoney.Domain.Models;
+﻿using MongoDB.Driver;
 using MrMoney.Util.Global;
 
 namespace MrMoney.Infrastructure.Data

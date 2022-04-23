@@ -1,4 +1,5 @@
-﻿using MrMoney.Domain.Interfaces.Repositories;
+﻿using MrMoney.Domain.Dtos;
+using MrMoney.Domain.Interfaces.Repositories;
 using MrMoney.Domain.Interfaces.Services;
 using MrMoney.Domain.Models;
 
@@ -20,9 +21,19 @@ namespace MrMoney.Domain.Services
             return await _userRepository.GetAsync(id);
         }
 
-        public Task CreateAsync(User newBook)
+        public async Task<User> CreateUserAsync(UserDto userDto)
         {
-            return _userRepository.CreateAsync(newBook);
+            if (userDto == null || string.IsNullOrWhiteSpace(userDto.Username) || string.IsNullOrWhiteSpace(userDto.Password)) return null;
+
+            var userAlreadyExists = await _userRepository.GetByUsername(userDto.Username);
+            if (userAlreadyExists is not null) return null;
+
+            var hashPassword = HashGeneration(userDto.Password);
+            var user = new User { Name = userDto.Name, Username = userDto.Username, Password = hashPassword };
+
+            await _userRepository.CreateAsync(user);
+
+            return user;
         }
 
         public Task RemoveAsync(string id)
@@ -33,6 +44,27 @@ namespace MrMoney.Domain.Services
         public Task UpdateAsync(string id, User updatedBook)
         {
             return _userRepository.UpdateAsync(id, updatedBook);
+        }
+
+        public async Task<bool> Login(UserDto userDto)
+        {
+            if (userDto == null || string.IsNullOrWhiteSpace(userDto.Username) || string.IsNullOrWhiteSpace(userDto.Password)) return false;
+
+            var user = await _userRepository.GetByUsername(userDto.Username);
+
+            bool verified = BCrypt.Net.BCrypt.Verify(userDto.Password, user.Password);
+
+            return verified;
+        }
+
+        private static string HashGeneration(string password)
+        {
+            int workfactor = 16;
+
+            string salt = BCrypt.Net.BCrypt.GenerateSalt(workfactor);
+            string hash = BCrypt.Net.BCrypt.HashPassword(password, salt);
+
+            return hash;
         }
     }
 }
