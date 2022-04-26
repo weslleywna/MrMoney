@@ -4,8 +4,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.1.32414.318
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MrMoney.API", "MrMoney.API.csproj", "{41338927-A7CC-41E6-8D39-82190EA315FA}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0ECA9914-C8F4-42B7-BC94-5C18AC980DBC} = {0ECA9914-C8F4-42B7-BC94-5C18AC980DBC}
+		{44A89EE0-51BD-4E2F-8FD9-C872551F948A} = {44A89EE0-51BD-4E2F-8FD9-C872551F948A}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MrMoney.Domain", "..\MrMoney.Domain\MrMoney.Domain.csproj", "{44A89EE0-51BD-4E2F-8FD9-C872551F948A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0ECA9914-C8F4-42B7-BC94-5C18AC980DBC} = {0ECA9914-C8F4-42B7-BC94-5C18AC980DBC}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MrMoney.Infrastructure", "..\MrMoney.Infrastructure\MrMoney.Infrastructure.csproj", "{7AB79E66-70CB-4958-B094-7894AE1F91B6}"
 EndProject

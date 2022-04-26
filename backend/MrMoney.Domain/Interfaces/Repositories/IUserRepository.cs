@@ -9,5 +9,6 @@ namespace MrMoney.Domain.Interfaces.Repositories
         Task CreateAsync(User newBook);
         Task UpdateAsync(string id, User updatedBook);
         Task RemoveAsync(string id);
+        Task<User> GetByUsername(string username);
     }
 }

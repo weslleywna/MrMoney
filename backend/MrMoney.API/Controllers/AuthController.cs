@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MrMoney.Domain.Dtos;
 using MrMoney.Domain.Interfaces.Services;
 using MrMoney.Domain.Models;
 
@@ -31,11 +32,13 @@ namespace MrMoney.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(User newBook)
+        public async Task<IActionResult> Post(UserDto userDto)
         {
-            await _authService.CreateAsync(newBook);
+            var newUser = await _authService.CreateUserAsync(userDto);
 
-            return CreatedAtAction(nameof(Get), new { id = newBook.Id }, newBook);
+            if (newUser is null) return BadRequest("Falha ao criar usuário.");
+
+            return CreatedAtAction(nameof(Get), new { id = newUser.Id }, newUser);
         }
 
         [HttpPut("{id:length(24)}")]
@@ -68,6 +71,13 @@ namespace MrMoney.API.Controllers
             await _authService.RemoveAsync(id);
 
             return NoContent();
+        }
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] UserDto userDto)
+        {
+            var login = await _authService.Login(userDto);
+            return Ok();
         }
     }
 }

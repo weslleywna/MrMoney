@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Options;
-using MongoDB.Driver;
+﻿using MongoDB.Driver;
 using MrMoney.Domain.Interfaces.Repositories;
 using MrMoney.Domain.Models;
 using MrMoney.Infrastructure.Data;
@@ -22,5 +21,10 @@ namespace MrMoney.Infrastructure.Repositories
 
         public async Task RemoveAsync(string id) =>
             await Collection.DeleteOneAsync(x => x.Id == id);
+
+        public async Task<User> GetByUsername(string username)
+        {
+            return await Collection.Find(user => user.Username == username).FirstOrDefaultAsync();
+        }
     }
 }
