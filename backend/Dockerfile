@@ -1,20 +1,15 @@
-#See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
-
-FROM mongo:latest
-
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
-WORKDIR /app
-EXPOSE 80
-EXPOSE 443
-
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
-WORKDIR /src
+
+WORKDIR /app
+
 COPY . .
 RUN dotnet restore "./MrMoney.Infrastructure/MrMoney.Infrastructure.csproj"
 RUN dotnet restore "./MrMoney.Domain/MrMoney.Domain.csproj"
 RUN dotnet restore "./MrMoney.API/MrMoney.API.csproj"
+
 COPY . .
-WORKDIR "/src/."
+WORKDIR "/app/."
 RUN dotnet build "MrMoney.Infrastructure/MrMoney.Infrastructure.csproj" -c Release -o /app/build
 RUN dotnet build "MrMoney.Domain/MrMoney.Domain.csproj" -c Release -o /app/build
 RUN dotnet build "MrMoney.API/MrMoney.API.csproj" -c Release -o /app/build
