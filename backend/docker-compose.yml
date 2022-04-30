@@ -1,18 +1,24 @@
 version: '3'
 
 services:
-  app:
+  backend:
     build: .
     ports: 
       - 8000:80
       - 8001:443
     volumes:
-      - CAMINHO_CERTIFICADO:/https/
+      - C:\Users\wesll\.aspnet\https:/https/
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+;http://+
       - ASPNETCORE_HTTPS_PORT=8001
-      - ASPNETCORE_Kestrel__Certificates__Default__Password=SENHA_CERTIFICADO
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=certificado
       - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
     command: 
       ["dotnet", "MrMoney.API.dll"]
+
+  frontend:
+    build: ../frontend/mrmoney-react/
+    ports: 
+      - 3000:3000
+    command: ["npm", "start"]
