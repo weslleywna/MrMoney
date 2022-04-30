@@ -1,20 +1,24 @@
+import React, { useState } from 'react';
+
 import './App.css';
 
 import backgroundImage from "./assets/tomioka-1920-1080.png";
 
+import Login from './components/login/login';
+import CreateUser from './components/create-user/create-user';
+
 function App() {
+  const [toggle, setToggle] = useState('INITIAL');
+  const [showLogin, setShowLogin] = useState('');
   return (
     <div className='container' style={{ backgroundImage: `url(${backgroundImage})`, backgroundRepeat: 'no-repeat' }}>
-      <div className='form-login'>
-        <form>
-          <h3>LOGIN</h3>
-          <input type='text' placeholder='Username'/>
-          
-          <input type='text' placeholder='Username'/>
-          
-          <input type='submit' placeholder='Username'/>
-        </form>
-      </div>
+
+      {(toggle === 'INITIAL' || showLogin) && <button type='button' onClick={() => { setToggle('LOGIN'); setShowLogin(false); }}> LOGIN </button >}
+      {(toggle === 'INITIAL' || !showLogin) && <button type='button' onClick={() => { setToggle('CREATE'); setShowLogin(true); }}> CRIAR </button >}
+
+      {toggle === 'LOGIN' && <Login></Login>}
+      {toggle === 'CREATE' && <CreateUser></CreateUser>}
+
     </div>
   );
 }
