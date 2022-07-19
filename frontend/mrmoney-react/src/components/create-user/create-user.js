@@ -2,31 +2,55 @@ import '../../styles.css';
 import './create-user.css';
 
 import React, { useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 
-import App from '../../App';
+import authService from '../../services/auth-service';
 
 function CreateUser() {
-    const [toggle, setToggle] = useState('');
-    let teste = async function teste() {
-        const response = await fetch(`https://localhost:7267/auth`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name: 'teste', username: 'teste', password: 'teste' })
-        });
-        return await response.json();
-    };
+    let navigate = useNavigate();
+    const [name, setName] = useState('');
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+
+    async function createUser(e) {
+        e.preventDefault();
+        await authService.post(`/auth`, {
+            name: name,
+            username: username,
+            password: password
+        })
+            .then(response => {
+                navigate("/", { replace: true });
+            }).catch((error) => {
+                if (error.response) {
+                    // The request was made and the server responded with a status code
+                    // that falls out of the range of 2xx
+                    console.log(error.response.data);
+                    console.log(error.response.status);
+                    console.log(error.response.headers);
+                } else if (error.request) {
+                    // The request was made but no response was received
+                    // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                    // http.ClientRequest in node.js
+                    console.log(error.request);
+                } else {
+                    // Something happened in setting up the request that triggered an Error
+                    console.log('Error', error.message);
+                }
+            });;
+    }
+
     return (
         <div className='form-group'>
-            <form onSubmit={teste()}>
+            <form onSubmit={createUser}>
                 <h3 className='form-title'>CADASTRAR</h3>
-                <input className='form-input' type='text' placeholder='nome'></input>
-                <input className='form-input' type='text' placeholder='username'></input>
-                <input className='form-input' type='password' placeholder='senha'></input>
+                <input className='form-input' type='text' placeholder='nome' onChange={e => setName(e.target.value)} value={name}></input>
+                <input className='form-input' type='text' placeholder='username' onChange={e => setUsername(e.target.value)} value={username}></input>
+                <input className='form-input' type='password' placeholder='senha' onChange={e => setPassword(e.target.value)} value={password}></input>
                 <input className='form-input btn-group' type='submit' placeholder='Cadastrar' value='Cadastrar'></input>
             </form>
-            <a href='www.google.com' onClick={() => {setToggle(true)}}>Fazer Login</a>
-            {toggle && <App componentName={'CREATE'}></App>}
-        </div>
+            <Link to='/'>FAZER LOGIN</Link>
+        </div >
     );
 }
 

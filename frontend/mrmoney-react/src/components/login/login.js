@@ -1,6 +1,8 @@
 import '../../styles.css';
 import './login.css';
 
+import { Link } from 'react-router-dom';
+
 function Login() {
     return (
         <div className='form-group'>
@@ -10,8 +12,9 @@ function Login() {
 
                 <input type='password' className='form-input' placeholder='Password' />
 
-                <input type='submit' className='form-input btn-group' placeholder='Username' />
+                <input type='submit' className='form-input btn-group' />
             </form>
+            <Link to='/create'>CADASTRAR</Link>
         </div>
     );
 }
