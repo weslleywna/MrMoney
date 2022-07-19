@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MrMoney.Domain.Dtos;
 using MrMoney.Domain.Interfaces.Services;
 using MrMoney.Domain.Models;
@@ -31,6 +32,7 @@ namespace MrMoney.API.Controllers
             return user;
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> Post(UserDto userDto)
         {
@@ -73,11 +75,18 @@ namespace MrMoney.API.Controllers
             return NoContent();
         }
 
+        [AllowAnonymous]
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] UserDto userDto)
         {
-            var login = await _authService.Login(userDto);
-            return Ok();
+            var token = await _authService.Login(userDto);
+
+            if (string.IsNullOrWhiteSpace(token))
+            {
+                return Unauthorized();
+            }
+
+            return Ok(token);
         }
     }
 }

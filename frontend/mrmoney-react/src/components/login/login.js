@@ -1,15 +1,16 @@
+import '../../styles.css';
 import './login.css';
 
 function Login() {
     return (
-        <div className='form-login'>
+        <div className='form-group'>
             <form>
-                <h3>LOGIN</h3>
-                <input type='text' placeholder='Username' />
+                <h3 className='form-title'>LOGIN</h3>
+                <input type='text' className='form-input' placeholder='Username' />
 
-                <input type='text' placeholder='Username' />
+                <input type='password' className='form-input' placeholder='Password' />
 
-                <input type='submit' placeholder='Username' />
+                <input type='submit' className='form-input btn-group' placeholder='Username' />
             </form>
         </div>
     );
