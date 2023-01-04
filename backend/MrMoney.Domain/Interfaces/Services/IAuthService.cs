@@ -9,9 +9,9 @@ namespace MrMoney.Domain.Interfaces.Services
         Task<List<User>> GetAsync();
         Task<User?> GetAsync(string id);
         Task<User?> GetByUsernameAsync(string id);
-        Task<User> CreateUserAsync(UserDto userDto);
+        Task<User?> CreateUserAsync(UserDto userDto);
         Task UpdateAsync(string id, User updatedBook);
         Task RemoveAsync(string id);
-        Task<bool> Login(UserDto userDto);
+        Task<string> Login(UserDto userDto);
     }
 }
