@@ -3,7 +3,7 @@ using MrMoney.Util.Global;
 
 namespace MrMoney.Infrastructure.Data
 {
-    public class MongoDbContext<T> where T: class
+    public class MongoDbContext<TEntity> where TEntity : class
     {
         private IMongoDatabase _database { get; }
 
@@ -25,6 +25,6 @@ namespace MrMoney.Infrastructure.Data
             }
         }
 
-        public IMongoCollection<T> Collection { get { return _database.GetCollection<T>(typeof(T).Name); } }
+        public IMongoCollection<TEntity> Collection { get { return _database.GetCollection<TEntity>(typeof(TEntity).Name); } }
     }
 }

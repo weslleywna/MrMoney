@@ -66,5 +66,20 @@ namespace MrMoney.Domain.Services
 
             return hash;
         }
+
+        public Task CreateAsync(User newBook)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<User> GetByIdAsync(string id)
+        {
+            return await _userRepository.GetByIdAsync(id);
+        }
+
+        public async Task<User> GetByUsernameAsync(string username)
+        {
+            return await _userRepository.GetByUsername(username);
+        }
     }
 }
