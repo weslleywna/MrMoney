@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MrMoney.Domain.Dtos;
+using MrMoney.Domain.Interfaces.Repositories;
 using MrMoney.Domain.Interfaces.Services;
 using MrMoney.Domain.Models;
+using MrMoney.Infrastructure.Repositories;
 
 namespace MrMoney.API.Controllers
 {
@@ -12,8 +14,15 @@ namespace MrMoney.API.Controllers
     {
         private readonly IAuthService _authService;
 
-        public AuthController(IAuthService authService) =>
+        public AuthController(IAuthService authService) 
+        {
             _authService = authService;
+            
+        }
+
+        [HttpGet("{username}")]
+        public async Task<User> GetByUsernameAsync(string username) =>
+            await _authService.GetByUsernameAsync(username);
 
         [HttpGet]
         public async Task<List<User>> Get() =>
@@ -22,7 +31,7 @@ namespace MrMoney.API.Controllers
         [HttpGet("{id:length(24)}")]
         public async Task<ActionResult<User>> Get(string id)
         {
-            var user = await _authService.GetAsync(id);
+            var user = await _authService.GetByIdAsync(id);
 
             if (user is null)
             {

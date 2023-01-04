@@ -2,13 +2,8 @@
 
 namespace MrMoney.Domain.Interfaces.Repositories
 {
-    public interface IUserRepository
+    public interface IUserRepository : IRepositoryBase<User>
     {
-        Task<List<User>> GetAsync();
-        Task<User?> GetAsync(string id);
-        Task CreateAsync(User newBook);
-        Task UpdateAsync(string id, User updatedBook);
-        Task RemoveAsync(string id);
         Task<User> GetByUsername(string username);
     }
 }
